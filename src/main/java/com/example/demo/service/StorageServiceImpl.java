@@ -24,9 +24,10 @@ public class StorageServiceImpl implements StorageService{
     }
 
     @Override
-    public void store(MultipartFile file) {
+    public Path store(MultipartFile file) {
         try{
             Files.copy(file.getInputStream(),this.rootLocation.resolve(file.getOriginalFilename()));
+            return this.rootLocation.resolve(file.getOriginalFilename());
         }
         catch(Exception e){
             throw new RuntimeException(e.getMessage());
