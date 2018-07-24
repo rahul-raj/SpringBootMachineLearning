@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.service.DL4JService;
 import com.example.demo.service.StorageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +19,7 @@ import java.nio.file.Path;
 public class UploadFileController {
 
     @Autowired
-    private StorageService storageService;
+    private DL4JService dl4JService;
 
     private Logger log = LoggerFactory.getLogger(this.getClass().getName());
 
@@ -39,9 +40,9 @@ public class UploadFileController {
                   model.addAttribute("message","Please select a file and try again!");
                   return "uploadForm";
               }
-              Path path = storageService.store(file);
-              log.info(path.toString());
-              model.addAttribute("message","File uploaded successfully");
+              String result = dl4JService.fetchPrediction(file);
+              log.info(result);
+              model.addAttribute("message",result);
         }
         catch(Exception e){
             model.addAttribute("message","Exception");
