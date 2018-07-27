@@ -1,7 +1,6 @@
 package com.example.demo.controller;
 
 import com.example.demo.service.DL4JService;
-import com.example.demo.service.StorageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +11,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 
 @Controller
 public class UploadFileController {
@@ -45,7 +46,7 @@ public class UploadFileController {
               model.addAttribute("message",result);
         }
         catch(Exception e){
-            model.addAttribute("message","Exception");
+            model.addAttribute("message",e.getMessage());
         }
         return "uploadForm";
     }
