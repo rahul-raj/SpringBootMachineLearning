@@ -30,7 +30,7 @@ public class UploadFileController {
     }
 
     @GetMapping("/customerLossDoc/upload")
-    public String customerLossPrediction(){
+    public String customerLossPredictionForm(){
         return "uploadForm";
     }
 
@@ -49,6 +49,16 @@ public class UploadFileController {
             model.addAttribute("message",e.getMessage());
         }
         return "uploadForm";
+    }
+
+    @GetMapping("/animalClassification")
+    public String animalClassification(){
+        return "animalClassification";
+    }
+
+    @GetMapping("/customerLossPrediction")
+    public String customerLossPrediction(){
+        return "customerLossPrediction";
     }
 
 }
